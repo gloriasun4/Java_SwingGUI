@@ -11,18 +11,14 @@ public class Main {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(500,500);
-        frame.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
+        frame.setLayout(new GridLayout(3,3,10,10));
 
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(250,250));
-        panel.setBackground(Color.lightGray);
-        panel.setLayout(new FlowLayout());
 
-        for (int i = 0; i <10; i++) {
-            panel.add(new JButton("" + i));
+
+        for (int i = 1; i <10; i++) {
+            frame.add(new JButton("" + i));
         }
 
-        frame.add(panel);
         frame.setVisible(true);
 
     }
