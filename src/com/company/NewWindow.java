@@ -10,6 +10,8 @@ public class NewWindow {
 
     NewWindow() {
 
+
+
         label.setBounds(0,0,100,50);
         label.setFont(new Font(null, Font.PLAIN, 25));
 
@@ -19,6 +21,7 @@ public class NewWindow {
         frame.setSize(420, 420);
         frame.setLayout(null);
         frame.setVisible(true);
+
 
     }
 }
