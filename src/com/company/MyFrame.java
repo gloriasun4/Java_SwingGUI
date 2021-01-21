@@ -4,41 +4,79 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class MyFrame extends JFrame implements ActionListener {
 
-    //only works with reference types or Wrapper class (ex. Integer vs. int)
-    JComboBox comboBox;
+    JMenuBar menuBar;
+    JMenu fileMenu;
+    JMenu editMenu;
+    JMenu helpMenu;
+    JMenuItem loadItem;
+    JMenuItem saveItem;
+    JMenuItem exitItem;
+    ImageIcon loadIcon;
+    ImageIcon saveIcon;
+    ImageIcon exitIcon;
 
     MyFrame() {
 
-
-        String[] roasts = {"boxed like a fish", "wiener built like a tic tac", "any askers?", "you're short", "literally grow"};
-        comboBox = new JComboBox(roasts);
-        comboBox.addActionListener(this);
-
-        //comboBox.setEditable(true);
-        //System.out.println(comboBox.getItemCount());
-        //comboBox.addItem("freer than a Costco sample");
-        //comboBox.insertItemAt("you were conceived at the back of a Dennys", 0);
-        //comboBox.setSelectedIndex(0);
-        //comboBox.removeItem("you're short");
-        //omboBox.removeItemAt(0);
-
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(500,500);
         this.setLayout(new FlowLayout());
 
-        this.add(comboBox);
+        loadIcon = new ImageIcon("pizza_emoji.png");
+        saveIcon = new ImageIcon("hamburger_emoji.png");
+        exitIcon = new ImageIcon("hot-dog_emoji.png");
 
-        this.pack();
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu("File");
+        editMenu = new JMenu("Edit");
+        helpMenu = new JMenu("Help");
+
+        loadItem = new JMenuItem("Load");
+        saveItem = new JMenuItem("Save");
+        exitItem = new JMenuItem("Exit");
+
+        loadItem.addActionListener(this);
+        saveItem.addActionListener(this);
+        exitItem.addActionListener(this);
+
+        loadItem.setIcon(loadIcon);
+        saveItem.setIcon(saveIcon);
+        exitItem.setIcon(exitIcon);
+
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        editMenu.setMnemonic(KeyEvent.VK_E);
+        helpMenu.setMnemonic(KeyEvent.VK_H);
+
+        loadItem.setMnemonic(KeyEvent.VK_L);
+        saveItem.setMnemonic(KeyEvent.VK_S);
+        exitItem.setMnemonic(KeyEvent.VK_E);
+
+        fileMenu.add(loadItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(exitItem);
+
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(helpMenu);
+
+        this.setJMenuBar(menuBar);
         this.setVisible(true);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == comboBox) {
-            System.out.println(comboBox.getSelectedItem());
+        if (e.getSource()==loadItem) {
+            System.out.println("Loading...");
+        }
+        if (e.getSource()==saveItem) {
+            System.out.println("Saving...");
+        }
+        if (e.getSource()==exitItem) {
+            System.exit(0);
         }
     }
 }
