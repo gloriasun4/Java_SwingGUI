@@ -8,28 +8,31 @@ import java.awt.event.ActionListener;
 public class MyFrame extends JFrame implements ActionListener {
 
     JButton button;
-    JTextField textField;
+    JCheckBox checkBox;
+    ImageIcon xIcon;
+    ImageIcon checkIcon;
 
     MyFrame() {
-
-        textField = new JTextField();
-        textField.setPreferredSize(new Dimension(250,40));
-        textField.setFont(new Font("Consolas", Font.PLAIN, 35));
-        textField.setForeground(Color.red);
-        textField.setBackground(Color.black);
-        textField.setCaretColor(Color.white);
-        textField.setText("Username: ");
-
-        button = new JButton("Submit");
-        button.addActionListener(this);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
-        //has to be before pack
-        this.add(button);
-        this.add(textField);
+        xIcon = new ImageIcon("egg_small.jpg");
+        checkIcon = new ImageIcon("eggbacon.jpg");
 
+        button = new JButton();
+        button.setText("button");
+        button.addActionListener(this);
+
+        checkBox = new JCheckBox();
+        checkBox.setText("checkboxed like a fish");
+        checkBox.setFocusable(false);
+        checkBox.setFont(new Font("Consolas", Font.PLAIN, 35));
+        checkBox.setIcon(xIcon);
+        checkBox.setSelectedIcon(checkIcon);
+
+        this.add(button);
+        this.add(checkBox);
         this.pack();
         this.setVisible(true);
 
@@ -37,10 +40,8 @@ public class MyFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==button) {
-            System.out.println("Hello " + textField.getText());
-            button.setEnabled(false);
-            textField.setEditable(false);
+        if (e.getSource() == button) {
+            System.out.println(checkBox.isSelected());
         }
     }
 }
