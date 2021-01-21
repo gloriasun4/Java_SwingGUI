@@ -7,32 +7,44 @@ import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame implements ActionListener {
 
-    JButton button;
-    JCheckBox checkBox;
-    ImageIcon xIcon;
-    ImageIcon checkIcon;
+    JRadioButton pizzaButton;
+    JRadioButton hamburgerButton;
+    JRadioButton hotdogButton;
+    ButtonGroup group;
+    ImageIcon pizzaImage;
+    ImageIcon hamburgerImage;
+    ImageIcon hotdogImage;
 
     MyFrame() {
+
+        pizzaButton = new JRadioButton("pizza");
+        hamburgerButton = new JRadioButton("hamburger");
+        hotdogButton = new JRadioButton("hotdog");
+
+        pizzaImage = new ImageIcon("pizza_emoji.png");
+        hamburgerImage = new ImageIcon("hamburger_emoji.png");
+        hotdogImage = new ImageIcon("hot-dog_emoji.png");
+
+        pizzaButton.setIcon(pizzaImage);
+        hamburgerButton.setIcon(hamburgerImage);
+        hotdogButton.setIcon(hotdogImage);
+
+        pizzaButton.addActionListener(this);
+        hamburgerButton.addActionListener(this);
+        hotdogButton.addActionListener(this);
+
+        group = new ButtonGroup();
+        group.add(pizzaButton);
+        group.add(hamburgerButton);
+        group.add(hotdogButton);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
-        xIcon = new ImageIcon("egg_small.jpg");
-        checkIcon = new ImageIcon("eggbacon.jpg");
+        this.add(pizzaButton);
+        this.add(hamburgerButton);
+        this.add(hotdogButton);
 
-        button = new JButton();
-        button.setText("button");
-        button.addActionListener(this);
-
-        checkBox = new JCheckBox();
-        checkBox.setText("checkboxed like a fish");
-        checkBox.setFocusable(false);
-        checkBox.setFont(new Font("Consolas", Font.PLAIN, 35));
-        checkBox.setIcon(xIcon);
-        checkBox.setSelectedIcon(checkIcon);
-
-        this.add(button);
-        this.add(checkBox);
         this.pack();
         this.setVisible(true);
 
@@ -40,9 +52,16 @@ public class MyFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button) {
-            System.out.println(checkBox.isSelected());
+        if (e.getSource() == pizzaButton){
+            System.out.println("You ordered pizza!");
         }
+        if (e.getSource() == hamburgerButton) {
+            System.out.println("You ordered hamburger!");
+        }
+        if (e.getSource() == hotdogButton) {
+            System.out.println("You ordered hotdog!");
+        }
+
     }
 }
 
