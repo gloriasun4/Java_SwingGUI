@@ -7,43 +7,28 @@ import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame implements ActionListener {
 
-    JRadioButton pizzaButton;
-    JRadioButton hamburgerButton;
-    JRadioButton hotdogButton;
-    ButtonGroup group;
-    ImageIcon pizzaImage;
-    ImageIcon hamburgerImage;
-    ImageIcon hotdogImage;
+    //only works with reference types or Wrapper class (ex. Integer vs. int)
+    JComboBox comboBox;
 
     MyFrame() {
 
-        pizzaButton = new JRadioButton("pizza");
-        hamburgerButton = new JRadioButton("hamburger");
-        hotdogButton = new JRadioButton("hotdog");
 
-        pizzaImage = new ImageIcon("pizza_emoji.png");
-        hamburgerImage = new ImageIcon("hamburger_emoji.png");
-        hotdogImage = new ImageIcon("hot-dog_emoji.png");
+        String[] roasts = {"boxed like a fish", "wiener built like a tic tac", "any askers?", "you're short", "literally grow"};
+        comboBox = new JComboBox(roasts);
+        comboBox.addActionListener(this);
 
-        pizzaButton.setIcon(pizzaImage);
-        hamburgerButton.setIcon(hamburgerImage);
-        hotdogButton.setIcon(hotdogImage);
-
-        pizzaButton.addActionListener(this);
-        hamburgerButton.addActionListener(this);
-        hotdogButton.addActionListener(this);
-
-        group = new ButtonGroup();
-        group.add(pizzaButton);
-        group.add(hamburgerButton);
-        group.add(hotdogButton);
+        //comboBox.setEditable(true);
+        //System.out.println(comboBox.getItemCount());
+        //comboBox.addItem("freer than a Costco sample");
+        //comboBox.insertItemAt("you were conceived at the back of a Dennys", 0);
+        //comboBox.setSelectedIndex(0);
+        //comboBox.removeItem("you're short");
+        //omboBox.removeItemAt(0);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
-        this.add(pizzaButton);
-        this.add(hamburgerButton);
-        this.add(hotdogButton);
+        this.add(comboBox);
 
         this.pack();
         this.setVisible(true);
@@ -52,16 +37,9 @@ public class MyFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pizzaButton){
-            System.out.println("You ordered pizza!");
+        if(e.getSource() == comboBox) {
+            System.out.println(comboBox.getSelectedItem());
         }
-        if (e.getSource() == hamburgerButton) {
-            System.out.println("You ordered hamburger!");
-        }
-        if (e.getSource() == hotdogButton) {
-            System.out.println("You ordered hotdog!");
-        }
-
     }
 }
 
