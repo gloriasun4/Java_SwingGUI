@@ -2,74 +2,75 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.io.File;
 
-public class MyFrame extends JFrame implements KeyListener {
+public class MyFrame extends JFrame implements MouseListener {
 
     JLabel label;
-    ImageIcon icon;
+    ImageIcon pleading;
+    ImageIcon hug;
+    ImageIcon smilingBlushing;
+    ImageIcon smile;
+    ImageIcon neutral;
+    ImageIcon worried;
+    ImageIcon unamused;
+    ImageIcon yawning;
+
 
     MyFrame() {
 
-        this.getContentPane().setBackground(Color.black);
-
-        label = new JLabel();
-        label.setBounds(200,350, 100, 100);
-        //label.setBackground(Color.red);
-        //label.setOpaque(true);
-
-        icon = new ImageIcon(getClass().getResource("egg_small.jpg"));
-        label.setIcon(icon);
-
-        this.add(label);
+        pleading = new ImageIcon(getClass().getResource("pleading_emoji.png"));
+        hug = new ImageIcon(getClass().getResource("hug_emoji.png"));
+        smilingBlushing = new ImageIcon(getClass().getResource("smilingBlushing_emoji.png"));
+        smile = new ImageIcon(getClass().getResource("smile_emoji.png"));
+        neutral = new ImageIcon(getClass().getResource("neutral_emoji.png"));
+        worried = new ImageIcon(getClass().getResource("worried_emoji.png"));
+        unamused = new ImageIcon(getClass().getResource("unamused_emoji.png"));
+        yawning = new ImageIcon(getClass().getResource("yawning_emoji.png"));
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(500,500);
-        this.setLayout(null);
-        this.addKeyListener(this);
+        this.setLayout(new FlowLayout());
+        this.setLocationRelativeTo(null);
 
+        label = new JLabel();
+        //label.setBackground(Color.red);
+        //label.setOpaque(true);
+        this.addMouseListener(this);
+        //label.setText("Give me attention!");
+        //label.setFont(new Font("Lucida", Font.ITALIC, 50));
+        label.setIcon(pleading);
 
+        this.add(label);
+        this.pack();
         this.setVisible(true);
 
     }
 
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        switch(e.getKeyChar()) {
-            case 'w': label.setLocation(label.getX(), label.getY()-5);
-                break;
-            case 'a': label.setLocation(label.getX()-5, label.getY());
-                break;
-            case 's': label.setLocation(label.getX(), label.getY()+5);
-                break;
-            case 'd': label.setLocation(label.getX()+5, label.getY());
-                break;
-        }
+    public void mouseClicked(MouseEvent e) {
+        label.setIcon(unamused);
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case 38: label.setLocation(label.getX(), label.getY()-5);
-                break;
-            case 37: label.setLocation(label.getX()-5, label.getY());
-                break;
-            case 40: label.setLocation(label.getX(), label.getY()+5);
-                break;
-            case 39: label.setLocation(label.getX()+5, label.getY());
-                break;
-        }
+    public void mousePressed(MouseEvent e) {
+        label.setIcon(smilingBlushing);
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        System.out.println("You released key char: " + e.getKeyChar());
-        System.out.println("You released key code: " + e.getKeyCode());
+    public void mouseReleased(MouseEvent e) {
+        label.setIcon(unamused);
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        label.setIcon(hug);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        label.setIcon(pleading);
     }
 }
 
