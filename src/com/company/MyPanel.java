@@ -2,37 +2,60 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MyPanel extends JPanel {
+public class MyPanel extends JPanel implements ActionListener {
 
-    Image image;
+    final int PANEL_WIDTH = 650;
+    final int PANEL_HEIGHT = 650;
+
+    Image sbPatrick;
+    Image sbImagination;
+    Timer timer;
+    int xVelocity = 2;
+    int yVelocity = 2;
+    int x = 0;
+    int y = 0;
 
     MyPanel() {
-        this.setPreferredSize(new Dimension(500,500));
-        image = new ImageIcon(getClass().getResource("hamburger_emoji.png")).getImage();
-        //this.setBackground(Color.black);
-        //this.setOpaque(true);
+        this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this.setBackground(Color.black);
+
+        sbPatrick = new ImageIcon(getClass().
+                getResource("spongebob_patrick_concentrated.png")).getImage();
+        sbImagination = new ImageIcon(getClass().
+                getResource("spongebob_imagination.jpg")).getImage();
+
+        timer = new Timer(10, this);
+        timer.start();
 
     }
+
     public void paint(Graphics g) {
-        Graphics2D g2D = (Graphics2D)g;
 
-        g2D.setPaint(Color.red);
-        //g2D.setStroke(new BasicStroke(5));
-        //g2D.drawLine(0,0,500,500);
-        //g2D.drawRect(0,0,100,200);
-        //g2D.fillRect(0,0,50,100);
-        //g2D.fillArc(0,0,100,100,0, 180);
-        //g2D.setPaint(Color.white);
-        //g2D.fillArc(0,0,100,100,180, 180);
+        super.paint(g);
 
-        /*int[] xPoints = {150,250,350};
-        int[] yPoints = {300,150,300};
-        g2D.drawPolygon(xPoints, yPoints, 3);*/
+        Graphics2D g2d = (Graphics2D) g;
 
-        g2D.setFont(new Font("SansSerif", Font.BOLD, 20));
-        g2D.drawString("boxed like a fish", 10,50);
-        g2D.drawImage(image,0,0, null);
+        g2d.drawImage(sbImagination,0,0,null);
+        g2d.drawImage(sbPatrick, x,y,null);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (x >= PANEL_WIDTH - sbPatrick.getWidth(null) ||
+        x < 0) {
+            xVelocity = xVelocity * -1;
+        }
+        if (y >= PANEL_HEIGHT - sbPatrick.getHeight(null) ||
+                y < 0) {
+            yVelocity = yVelocity * -1;
+        }
+        x = x + xVelocity;
+        y = y + yVelocity;
+        repaint();
+
+    }
 }
